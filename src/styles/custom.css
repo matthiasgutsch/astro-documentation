@@ -1,0 +1,18 @@
+/* Starlight color customization
+   https://starlight.astro.build/guides/css-and-tailwind/#color-theme
+
+   Override these CSS variables to change the theme colors.
+   Light mode values go in :root, dark mode in [data-theme="dark"].
+*/
+
+:root {
+  /* Accent color (links, active states, badges) */
+  --sl-color-accent-low: #e6f0ff;
+  --sl-color-accent: #f00000;
+  --sl-color-accent-high: #f00000;
+}
+
+.site-title {
+  font-size: 20px;
+  color: #666;
+}

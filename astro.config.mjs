@@ -6,7 +6,8 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "PrimeNG Docs",
+      title: "DC Design System",
+      customCss: ["./src/styles/custom.css"],
       social: [
         {
           icon: "github",
