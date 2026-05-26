@@ -14,20 +14,20 @@ export default defineConfig({
 
       sidebar: [
         {
-          label: "v21 (current)",
+          label: "Foundations",
+          items: [
+            { label: "Colors", slug: "tokens/colors" },
+            { label: "Typography", slug: "tokens/typography" },
+            { label: "Spacing", slug: "tokens/spacing" },
+          ],
+        },
+
+        {
+          label: "Components",
           items: [
             { label: "Button", slug: "components/button" },
             { label: "Tag", slug: "components/tag" },
             { label: "Select", slug: "components/select" },
-          ],
-        },
-        {
-          label: "v20",
-          collapsed: true,
-          items: [
-            { label: "Button", slug: "v20/components/button" },
-            { label: "Tag", slug: "v20/components/tag" },
-            { label: "Select", slug: "v20/components/select" },
           ],
         },
       ],
