@@ -1,0 +1,35 @@
+---
+title: Select
+description: Visual playground for PrimeNG Angular Select component variants — variant, size, states, and more.
+---
+
+import IframeDemo from "../../../components/IframeDemo.astro";
+
+## Live Component
+
+<IframeDemo component="select" />
+
+---
+
+## Variants
+
+<IframeDemo component="select-variants" />
+
+### Props reference
+
+| Prop          | Type      | Values                | Default    |
+| ------------- | --------- | --------------------- | ---------- |
+| `variant`     | `string`  | `outlined` · `filled` | `outlined` |
+| `size`        | `string`  | `small` · `large`     | —          |
+| `placeholder` | `string`  | any string            | —          |
+| `disabled`    | `boolean` | `true` · `false`      | `false`    |
+| `invalid`     | `boolean` | `true` · `false`      | `false`    |
+| `fluid`       | `boolean` | `true` · `false`      | `false`    |
+| `showClear`   | `boolean` | `true` · `false`      | `false`    |
+| `loading`     | `boolean` | `true` · `false`      | `false`    |
+| `editable`    | `boolean` | `true` · `false`      | `false`    |
+| `filter`      | `boolean` | `true` · `false`      | `false`    |
+| `checkmark`   | `boolean` | `true` · `false`      | `false`    |
+| `optionLabel` | `string`  | property name         | —          |
+| `optionValue` | `string`  | property name         | —          |
+| `options`     | `any[]`   | array of items        | —          |

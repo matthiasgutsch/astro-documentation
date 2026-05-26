@@ -1,0 +1,92 @@
+---
+interface Props {
+  component: string;
+}
+const { component } = Astro.props;
+const src = `/angular-app/index.html#/${component}`;
+const iframeId = `iframe-${component}`;
+---
+
+<div class="iframe-demo">
+  <div class="iframe-header">
+    <span class="badge">Live · PrimeNG Angular</span>
+    <a href={src} target="_blank" rel="noopener" class="open-link">Open in new tab ↗</a>
+  </div>
+  <iframe
+    id={iframeId}
+    src={src}
+    width="100%"
+    frameborder="0"
+    title={`${component} live demo`}
+    loading="lazy"
+    style="height: 200px;"
+  ></iframe>
+</div>
+
+<script define:vars={{ iframeId, src }}>
+  window.addEventListener('message', (event) => {
+    if (event.data?.type !== 'iframe-resize') return;
+    const iframe = document.getElementById(iframeId);
+    if (!iframe) return;
+    if (iframe.contentWindow && event.source === iframe.contentWindow) {
+      iframe.style.height = event.data.height + 'px';
+    }
+  });
+</script>
+
+<style>
+  .iframe-demo {
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+
+  .iframe-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.875rem;
+    background: var(--sl-color-bg-sidebar);
+    border-bottom: 1px solid var(--sl-color-hairline);
+    gap: 0.5rem;
+  }
+
+  .badge {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--sl-color-text-accent);
+  }
+
+  .open-link {
+    font-size: 0.75rem;
+    color: var(--sl-color-text-accent);
+    text-decoration: none;
+    opacity: 0.8;
+  }
+  .open-link:hover { opacity: 1; text-decoration: underline; }
+
+  iframe {
+    display: block;
+    width: 100%;
+    border: none;
+    transition: height 0.15s ease;
+  }
+
+  .note {
+    margin: 0;
+    padding: 0.5rem 0.875rem;
+    font-size: 0.75rem;
+    color: var(--sl-color-text);
+    opacity: 0.6;
+    background: var(--sl-color-bg);
+    border-top: 1px solid var(--sl-color-hairline);
+  }
+
+  .note code {
+    font-size: 0.75rem;
+  }
+</style>

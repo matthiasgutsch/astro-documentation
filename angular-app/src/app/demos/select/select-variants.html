@@ -1,0 +1,121 @@
+<div class="variants">
+  <!-- Variant -->
+  <div class="group">
+    <div class="group-title">Variant</div>
+    <div class="row">
+      <div class="item">
+        <span class="label">Outlined (default)</span>
+        <p-select [(ngModel)]="v['outlined']" [options]="options" placeholder="Select" />
+      </div>
+      <div class="item">
+        <span class="label">Filled</span>
+        <p-select
+          [(ngModel)]="v['filled']"
+          [options]="options"
+          variant="filled"
+          placeholder="Select"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Size -->
+  <div class="group">
+    <div class="group-title">Size</div>
+    <div class="row">
+      <div class="item">
+        <span class="label">Small</span>
+        <p-select [(ngModel)]="v['sm']" [options]="options" size="small" placeholder="Select" />
+      </div>
+      <div class="item">
+        <span class="label">Normal (default)</span>
+        <p-select [(ngModel)]="v['md']" [options]="options" placeholder="Select" />
+      </div>
+      <div class="item">
+        <span class="label">Large</span>
+        <p-select [(ngModel)]="v['lg']" [options]="options" size="large" placeholder="Select" />
+      </div>
+    </div>
+  </div>
+
+  <!-- States -->
+  <div class="group">
+    <div class="group-title">States</div>
+    <div class="row">
+      <div class="item">
+        <span class="label">Default</span>
+        <p-select [(ngModel)]="v['default']" [options]="options" placeholder="Select" />
+      </div>
+      <div class="item">
+        <span class="label">Disabled</span>
+        <p-select
+          [(ngModel)]="v['disabled']"
+          [options]="options"
+          placeholder="Select"
+          [disabled]="true"
+        />
+      </div>
+      <div class="item">
+        <span class="label">Invalid</span>
+        <p-select
+          [(ngModel)]="v['invalid']"
+          [options]="options"
+          placeholder="Select"
+          [invalid]="true"
+        />
+      </div>
+      <div class="item">
+        <span class="label">Loading</span>
+        <p-select
+          [(ngModel)]="v['loading']"
+          [options]="options"
+          placeholder="Select"
+          [loading]="true"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="group">
+    <div class="group-title">Features</div>
+    <div class="row">
+      <div class="item">
+        <span class="label">Show Clear</span>
+        <p-select
+          [(ngModel)]="v['clear']"
+          [options]="options"
+          placeholder="Select"
+          [showClear]="true"
+        />
+      </div>
+      <div class="item">
+        <span class="label">Filter</span>
+        <p-select
+          [(ngModel)]="v['filter']"
+          [options]="options"
+          placeholder="Select"
+          [filter]="true"
+        />
+      </div>
+      <div class="item">
+        <span class="label">Checkmark</span>
+        <p-select
+          [(ngModel)]="v['checkmark']"
+          [options]="options"
+          placeholder="Select"
+          [checkmark]="true"
+        />
+      </div>
+      <div class="item" style="width: 100%">
+        <span class="label">Fluid (full width)</span>
+        <p-select
+          [(ngModel)]="v['fluid']"
+          [options]="options"
+          placeholder="Select"
+          [fluid]="true"
+        />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+---
+title: Button
+description: Visual playground for PrimeNG Angular Button component variants — severity, appearance, size, icons, and states.
+---
+
+import IframeDemo from "../../../components/IframeDemo.astro";
+
+## Live Component
+
+<IframeDemo component="button" />
+
+---
+
+## Variants
+
+| Prop            | Type      | Values                                                                                    | Default      |
+| --------------- | --------- | ----------------------------------------------------------------------------------------- | ------------ |
+| `label`         | `string`  | any string                                                                                | —            |
+| `severity`      | `string`  | `primary` · `secondary` · `success` · `info` · `warning` · `danger` · `help` · `contrast` | `primary`    |
+| `variant`       | `string`  | `outlined` · `text` · `link`                                                              | —            |
+| `size`          | `string`  | `small` · `large`                                                                         | —            |
+| `raised`        | `boolean` | `true` · `false`                                                                          | `false`      |
+| `rounded`       | `boolean` | `true` · `false`                                                                          | `false`      |
+| `icon`          | `string`  | PrimeIcons class e.g. `pi pi-check`                                                       | —            |
+| `iconPos`       | `string`  | `left` · `right` · `top` · `bottom`                                                       | `left`       |
+| `loading`       | `boolean` | `true` · `false`                                                                          | `false`      |
+| `loadingIcon`   | `string`  | PrimeIcons class                                                                          | `pi-spinner` |
+| `disabled`      | `boolean` | `true` · `false`                                                                          | `false`      |
+| `badge`         | `string`  | any string                                                                                | —            |
+| `badgeSeverity` | `string`  | severity value                                                                            | `danger`     |
+| `link`          | `boolean` | _(deprecated)_ use `variant="link"`                                                       | `false`      |
+
+| Output    | Description                        |
+| --------- | ---------------------------------- |
+| `onClick` | Emitted on button click            |
+| `onFocus` | Emitted when button receives focus |
+| `onBlur`  | Emitted when button loses focus    |

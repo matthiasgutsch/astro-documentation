@@ -1,0 +1,61 @@
+<div class="demo-layout">
+
+  <div class="preview">
+    <p-button
+      label="Button"
+      [severity]="severity"
+      [variant]="variant"
+      [size]="size"
+      [raised]="raised"
+      [rounded]="rounded"
+      [disabled]="disabled"
+      [loading]="loading"
+      [icon]="withIcon ? 'pi pi-check' : ''"
+    />
+  </div>
+
+  <div class="controls">
+
+    <div class="ctrl-group">
+      <span class="ctrl-label">Severity</span>
+      <div class="chips">
+        @for (s of severities; track s.label) {
+          <button class="chip" [class.active]="severity === s.value" (click)="severity = s.value">
+            {{ s.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="ctrl-group">
+      <span class="ctrl-label">Variant</span>
+      <div class="chips">
+        @for (v of variants; track v.label) {
+          <button class="chip" [class.active]="variant === v.value" (click)="variant = v.value">
+            {{ v.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="ctrl-group">
+      <span class="ctrl-label">Size</span>
+      <div class="chips">
+        @for (s of sizes; track s.label) {
+          <button class="chip" [class.active]="size === s.value" (click)="size = s.value">
+            {{ s.label }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="toggles">
+      <button class="toggle" [class.active]="raised"   (click)="raised   = !raised">Raised</button>
+      <button class="toggle" [class.active]="rounded"  (click)="rounded  = !rounded">Rounded</button>
+      <button class="toggle" [class.active]="disabled" (click)="disabled = !disabled">Disabled</button>
+      <button class="toggle" [class.active]="withIcon" (click)="withIcon = !withIcon">Icon</button>
+      <button class="toggle" [class.active]="loading"  (click)="loading  = !loading">Loading</button>
+    </div>
+
+  </div>
+</div>
