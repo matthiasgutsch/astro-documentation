@@ -37,6 +37,16 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demos/select/select-preview').then((m) => m.SelectPreviewComponent),
       },
+      {
+        path: 'inputtext',
+        loadComponent: () =>
+          import('./demos/inputtext/inputtext-demo').then((m) => m.InputTextDemoComponent),
+      },
+      {
+        path: 'inputtext-preview',
+        loadComponent: () =>
+          import('./demos/inputtext/inputtext-preview').then((m) => m.InputTextPreviewComponent),
+      },
     ],
   },
   {
@@ -69,6 +79,16 @@ export const routes: Routes = [
         path: 'select-preview',
         loadComponent: () =>
           import('./demos/select/select-preview').then((m) => m.SelectPreviewComponent),
+      },
+      {
+        path: 'inputtext',
+        loadComponent: () =>
+          import('./demos/inputtext/inputtext-demo').then((m) => m.InputTextDemoComponent),
+      },
+      {
+        path: 'inputtext-preview',
+        loadComponent: () =>
+          import('./demos/inputtext/inputtext-preview').then((m) => m.InputTextPreviewComponent),
       },
     ],
   },

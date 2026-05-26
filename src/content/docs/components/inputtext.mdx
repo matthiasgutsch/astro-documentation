@@ -1,0 +1,72 @@
+---
+title: InputText
+description: Visual playground for PrimeNG Angular InputText component variants — variant, size, and states.
+---
+
+import IframeDemo from "../../../components/IframeDemo.astro";
+import VariantPreview from "../../../components/VariantPreview.astro";
+
+## Live Component
+
+<IframeDemo component="inputtext" version="v21" />
+
+---
+
+## Variants
+
+### Variant
+
+<VariantPreview
+  label="Outlined (default)"
+  description="Default style. Displays a visible border around the input field."
+  path="inputtext-preview"
+  version="v21"
+/>
+<VariantPreview
+  label="Filled"
+  description="Fills the input background with a subtle surface color, removing the border outline."
+  path="inputtext-preview?variant=filled"
+  version="v21"
+/>
+
+### Size
+
+<VariantPreview
+  label="Small"
+  description="Reduced height and font size — use inside dense UI like toolbars or compact forms."
+  path="inputtext-preview?size=small"
+  version="v21"
+/>
+<VariantPreview
+  label="Normal (default)"
+  description="Standard size suitable for most use cases."
+  path="inputtext-preview"
+  version="v21"
+/>
+<VariantPreview
+  label="Large"
+  description="Increased height and font size — use for prominent form fields or accessible interfaces."
+  path="inputtext-preview?size=large"
+  version="v21"
+/>
+
+### States
+
+<VariantPreview
+  label="Disabled"
+  description="Prevents user interaction. The field is visually dimmed and non-interactive."
+  path="inputtext-preview?disabled=true"
+  version="v21"
+/>
+<VariantPreview
+  label="Invalid"
+  description="Marks the field as invalid with a red border — typically used after form validation."
+  path="inputtext-preview?invalid=true"
+  version="v21"
+/>
+<VariantPreview
+  label="Fluid"
+  description="Makes the input stretch to fill the full width of its container."
+  path="inputtext-preview?fluid=true"
+  version="v21"
+/>
