@@ -3,10 +3,13 @@ interface Props {
   label: string;
   description: string;
   path: string; // Angular route with optional query params e.g. "select-preview?variant=filled"
+  version?: string;
 }
-const { label, description, path } = Astro.props;
-const src = `/angular-app/index.html#/${path}`;
-const iframeId = `vp-${path.replace(/[^a-z0-9]/gi, '-')}`;
+const { label, description, path, version } = Astro.props;
+const [routePath, query] = path.split('?');
+const route = version ? `${version}/${routePath}` : routePath;
+const src = `/angular-app/index.html#/${route}${query ? '?' + query : ''}`;
+const iframeId = `vp-${(version ?? '') + path.replace(/[^a-z0-9]/gi, '-')}`;
 ---
 
 <div class="variant-row">

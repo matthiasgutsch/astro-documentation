@@ -1,10 +1,12 @@
 ---
 interface Props {
   component: string;
+  version?: string;
 }
-const { component } = Astro.props;
-const src = `/angular-app/index.html#/${component}`;
-const iframeId = `iframe-${component}`;
+const { component, version } = Astro.props;
+const route = version ? `${version}/${component}` : component;
+const src = `/angular-app/index.html#/${route}`;
+const iframeId = `iframe-${route.replace(/[^a-z0-9]/gi, '-')}`;
 ---
 
 <div class="iframe-demo">
