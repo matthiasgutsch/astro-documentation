@@ -18,5 +18,19 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./demos/select/select-variants').then((m) => m.SelectVariantsComponent),
   },
+  {
+    path: 'button-preview',
+    loadComponent: () =>
+      import('./demos/button/button-preview').then((m) => m.ButtonPreviewComponent),
+  },
+  {
+    path: 'tag-preview',
+    loadComponent: () => import('./demos/tag/tag-preview').then((m) => m.TagPreviewComponent),
+  },
+  {
+    path: 'select-preview',
+    loadComponent: () =>
+      import('./demos/select/select-preview').then((m) => m.SelectPreviewComponent),
+  },
   { path: '', redirectTo: 'button', pathMatch: 'full' },
 ];

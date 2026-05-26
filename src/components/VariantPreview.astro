@@ -1,0 +1,76 @@
+---
+interface Props {
+  label: string;
+  description: string;
+  path: string; // Angular route with optional query params e.g. "select-preview?variant=filled"
+}
+const { label, description, path } = Astro.props;
+const src = `/angular-app/index.html#/${path}`;
+const iframeId = `vp-${path.replace(/[^a-z0-9]/gi, '-')}`;
+---
+
+<div class="variant-row">
+  <div class="variant-info">
+    <span class="variant-label">{label}</span>
+    <p class="variant-desc">{description}</p>
+  </div>
+  <div class="variant-preview">
+    <iframe
+      id={iframeId}
+      src={src}
+      width="100%"
+      frameborder="0"
+      loading="lazy"
+      title={label}
+      style="height: 60px;"
+    ></iframe>
+  </div>
+</div>
+
+<script define:vars={{ iframeId }}>
+  window.addEventListener('message', (event) => {
+    if (event.data?.type !== 'iframe-resize') return;
+    const iframe = document.getElementById(iframeId);
+    if (iframe && iframe.contentWindow && event.source === iframe.contentWindow) {
+      iframe.style.height = event.data.height + 'px';
+    }
+  });
+</script>
+
+<style>
+  .variant-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--sl-color-hairline);
+  }
+  .variant-row:last-of-type {
+    border-bottom: none;
+  }
+  .variant-label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    color: var(--sl-color-text-accent);
+  }
+  .variant-desc {
+    margin: 0;
+    font-size: 0.825rem;
+    color: var(--sl-color-text);
+    line-height: 1.5;
+  }
+  .variant-preview {
+    border: 1px solid var(--sl-color-hairline);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--sl-color-bg);
+  }
+  .variant-preview iframe {
+    display: block;
+    width: 100%;
+    border: none;
+  }
+</style>
