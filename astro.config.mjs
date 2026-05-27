@@ -24,12 +24,7 @@ export default defineConfig({
 
         {
           label: "Components",
-          items: [
-            { label: "Button", slug: "components/button" },
-            { label: "InputText", slug: "components/inputtext" },
-            { label: "Select", slug: "components/select" },
-            { label: "Tag", slug: "components/tag" },
-          ],
+          items: [{ label: "Button", slug: "components/button" }],
         },
       ],
     }),

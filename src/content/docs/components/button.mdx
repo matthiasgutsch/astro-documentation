@@ -6,130 +6,131 @@ description: Visual playground for PrimeNG Angular Button component variants —
 import IframeDemo from "../../../components/IframeDemo.astro";
 import VariantPreview from "../../../components/VariantPreview.astro";
 
+export const playground = {
+  version: "v21",
+  liveComponent: "button",
+  previewBasePath: "button-preview",
+  iframeUiUrl:
+    "https://datacolor-storybook.azureedge.net/ui/18.0.0/iframe.html?globals=&args=&id=components-button--primary&viewMode=story",
+  iframeTemplateUrl:
+    "https://datacolor-storybook.azureedge.net/ui/18.0.0/iframe.html?globals=&args=size%3A{size}&id=components-button--{variant}&viewMode=story",
+  storyIframeBaseUrl:
+    "https://datacolor-storybook.azureedge.net/ui/18.0.0/iframe.html?globals=&args=&id=components-button--",
+  storybookStoryBaseUrl:
+    "https://datacolor-storybook.azureedge.net/ui/18.0.0/?path=/story/components-button--",
+  storybookUrl:
+    "https://datacolor-storybook.azureedge.net/documentation/#/docs/ui/18.0.0/https:%2F%2Fdatacolor-storybook.azureedge.net%2Fui%2F18.0.0%2F%3Fpath%3D%2Fdocs%2Fcomponents-button--documentation",
+  selectors: [
+    {
+      key: "variant",
+      label: "Variant",
+      defaultValue: "primary",
+      options: [
+        { label: "Primary", value: "primary" },
+        { label: "Secondary", value: "secondary" },
+        { label: "Text", value: "text" },
+        { label: "Inline", value: "inline" },
+        { label: "With Icon", value: "with-icon" },
+        { label: "Icon Only", value: "icon-only" },
+        { label: "Icon Not Glyph", value: "icon-not-glyph" },
+        { label: "Loading", value: "loading" },
+        { label: "Disabled", value: "disabled" },
+        { label: "Text No Padding", value: "text-no-padding" },
+        { label: "Button Link", value: "button-link" },
+      ],
+    },
+    {
+      key: "size",
+      label: "Size",
+      defaultValue: "m",
+      options: [
+        { label: "Small", value: "s" },
+        { label: "Medium", value: "m" },
+        { label: "Large", value: "l" },
+      ],
+    },
+  ],
+};
+
+export const variantGroups = [
+  {
+    title: "Severity",
+    variants: [
+      {
+        label: "Primary",
+        description: "Default severity. Used for the main call-to-action.",
+        query: "",
+        storyVariant: "primary",
+        sizeToken: "m",
+      },
+      {
+        label: "Secondary",
+        description:
+          "Neutral tone for secondary actions alongside a primary button.",
+        query: "severity=secondary",
+        storyVariant: "secondary",
+        sizeToken: "m",
+      },
+    ],
+  },
+  {
+    title: "Size",
+    variants: [
+      {
+        label: "Small",
+        description:
+          "Compact size for tight layouts like toolbars or table rows.",
+        query: "size=small",
+        storyVariant: "primary",
+        sizeToken: "s",
+      },
+      {
+        label: "Normal (default)",
+        description: "Standard size suitable for most use cases.",
+        query: "",
+        storyVariant: "primary",
+        sizeToken: "m",
+      },
+      {
+        label: "Large",
+        description:
+          "Larger size for prominent actions or accessible interfaces.",
+        query: "size=large",
+        storyVariant: "primary",
+        sizeToken: "l",
+      },
+    ],
+  },
+];
+
 ## Live Component
 
-<IframeDemo component="button" version="v21" />
+<IframeDemo
+  component={playground.liveComponent}
+  version={playground.version}
+  src={playground.iframeUiUrl}
+  srcTemplate={playground.iframeTemplateUrl}
+  selectors={playground.selectors}
+  storybookUrl={playground.storybookUrl}
+/>
 
 ---
 
 ## Variants
 
-### Severity
+{variantGroups.map((group) => (
 
-<VariantPreview
-  label="Primary"
-  description="Default severity. Used for the main call-to-action."
-  path="button-preview"
-  version="v21"
-/>
-<VariantPreview
-  label="Secondary"
-  description="Neutral tone for secondary actions alongside a primary button."
-  path="button-preview?severity=secondary"
-  version="v21"
-/>
-<VariantPreview
-  label="Success"
-  description="Confirms a successful or positive action."
-  path="button-preview?severity=success"
-  version="v21"
-/>
-<VariantPreview
-  label="Info"
-  description="Indicates an informational or neutral action."
-  path="button-preview?severity=info"
-  version="v21"
-/>
-<VariantPreview
-  label="Warning"
-  description="Signals a cautionary action that needs attention."
-  path="button-preview?severity=warn"
-  version="v21"
-/>
-<VariantPreview
-  label="Danger"
-  description="Marks a destructive or irreversible action."
-  path="button-preview?severity=danger"
-  version="v21"
-/>
-<VariantPreview
-  label="Contrast"
-  description="High-contrast style for use on colored or dark backgrounds."
-  path="button-preview?severity=contrast"
-  version="v21"
-/>
-
-### Appearance
-
-<VariantPreview
-  label="Filled (default)"
-  description="Solid background fill — the standard button style."
-  path="button-preview"
-  version="v21"
-/>
-<VariantPreview
-  label="Outlined"
-  description="Transparent background with a visible border."
-  path="button-preview?variant=outlined"
-  version="v21"
-/>
-<VariantPreview
-  label="Text"
-  description="No background or border — blends into the surrounding content."
-  path="button-preview?variant=text"
-  version="v21"
-/>
-<VariantPreview
-  label="Raised"
-  description="Adds a drop shadow to lift the button above the surface."
-  path="button-preview?raised=true"
-  version="v21"
-/>
-<VariantPreview
-  label="Rounded"
-  description="Fully rounded pill shape for a softer look."
-  path="button-preview?rounded=true"
-  version="v21"
-/>
-
-### Size
-
-<VariantPreview
-  label="Small"
-  description="Compact size for tight layouts like toolbars or table rows."
-  path="button-preview?size=small"
-  version="v21"
-/>
-<VariantPreview
-  label="Normal (default)"
-  description="Standard size suitable for most use cases."
-  path="button-preview"
-  version="v21"
-/>
-<VariantPreview
-  label="Large"
-  description="Larger size for prominent actions or accessible interfaces."
-  path="button-preview?size=large"
-  version="v21"
-/>
-
-### States
-
-<VariantPreview
-  label="With Icon"
-  description="Displays a leading icon alongside the label."
-  path="button-preview?icon=true"
-  version="v21"
-/>
-<VariantPreview
-  label="Loading"
-  description="Shows a spinner and disables interaction while an action is in progress."
-  path="button-preview?loading=true"
-  version="v21"
-/>
-<VariantPreview
-  label="Disabled"
-  description="Prevents interaction and dims the button visually."
-  path="button-preview?disabled=true"
-  version="v21"
-/>
+  <>
+    <h3>{group.title}</h3>
+    {group.variants.map((variant) => (
+      <VariantPreview
+        label={variant.label}
+        description={variant.description}
+        path={`${playground.previewBasePath}${variant.query ? `?${variant.query}` : ""}`}
+        version={playground.version}
+        src={`${playground.storyIframeBaseUrl}${variant.storyVariant ?? "primary"}&viewMode=story&args=size:${variant.sizeToken ?? "m"}`}
+        storybookUrl={`${playground.storybookStoryBaseUrl}${variant.storyVariant ?? "primary"}`}
+      />
+    ))}
+  </>
+))}

@@ -4,11 +4,13 @@ interface Props {
   description: string;
   path: string; // Angular route with optional query params e.g. "select-preview?variant=filled"
   version?: string;
+  storybookUrl?: string;
+  src?: string;
 }
-const { label, description, path, version } = Astro.props;
+const { label, description, path, version, storybookUrl, src } = Astro.props;
 const [routePath, query] = path.split('?');
 const route = version ? `${version}/${routePath}` : routePath;
-const src = `/angular-app/index.html#/${route}${query ? '?' + query : ''}`;
+const iframeSrc = src ?? `/angular-app/index.html#/${route}${query ? '?' + query : ''}`;
 const iframeId = `vp-${(version ?? '') + path.replace(/[^a-z0-9]/gi, '-')}`;
 ---
 
@@ -16,11 +18,14 @@ const iframeId = `vp-${(version ?? '') + path.replace(/[^a-z0-9]/gi, '-')}`;
   <div class="variant-info">
     <span class="variant-label">{label}</span>
     <p class="variant-desc">{description}</p>
+    {storybookUrl && (
+      <a class="variant-link" href={storybookUrl} target="_blank" rel="noreferrer">Storybook</a>
+    )}
   </div>
   <div class="variant-preview">
     <iframe
       id={iframeId}
-      src={src}
+      src={iframeSrc}
       width="100%"
       frameborder="0"
       loading="lazy"
@@ -64,6 +69,17 @@ const iframeId = `vp-${(version ?? '') + path.replace(/[^a-z0-9]/gi, '-')}`;
     font-size: 0.825rem;
     color: var(--sl-color-text);
     line-height: 1.5;
+  }
+  .variant-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--sl-color-text-accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  .variant-link:hover {
+    border-bottom-color: currentColor;
   }
   .variant-preview {
     border: 1px solid var(--sl-color-hairline);

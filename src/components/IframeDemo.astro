@@ -2,18 +2,65 @@
 interface Props {
   component: string;
   version?: string;
+  storybookUrl?: string;
+  src?: string;
+  srcTemplate?: string;
+  selectors?: {
+    key: string;
+    label: string;
+    defaultValue?: string;
+    options: { label: string; value: string }[];
+  }[];
 }
-const { component, version } = Astro.props;
+const { component, version, storybookUrl, src, srcTemplate, selectors = [] } = Astro.props;
 const route = version ? `${version}/${component}` : component;
-const src = `/angular-app/index.html#/${route}`;
+const initialSelectorValues = Object.fromEntries(
+  selectors.map((selector) => [
+    selector.key,
+    selector.defaultValue ?? selector.options[0]?.value ?? '',
+  ]),
+);
+const templateSrc = srcTemplate
+  ? Object.entries(initialSelectorValues).reduce(
+      (acc, [key, value]) => acc.replaceAll(`{${key}}`, encodeURIComponent(value)),
+      srcTemplate,
+    )
+  : undefined;
+const iframeSrc = templateSrc ?? src ?? `/angular-app/index.html#/${route}`;
 const iframeId = `iframe-${route.replace(/[^a-z0-9]/gi, '-')}`;
 ---
 
 <div class="iframe-demo">
+ 
+
+  {selectors.length > 0 && (
+    <div class="iframe-controls">
+      {selectors.map((selector) => (
+        <label class="control" for={`${iframeId}-${selector.key}`}>
+          <span>{selector.label}</span>
+          <select
+            id={`${iframeId}-${selector.key}`}
+            class="control-select"
+            data-iframe-id={iframeId}
+            data-selector-key={selector.key}
+          >
+            {selector.options.map((option) => (
+              <option
+                value={option.value}
+                selected={(selector.defaultValue ?? selector.options[0]?.value ?? '') === option.value}
+              >
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </label>
+      ))}
+    </div>
+  )}
 
   <iframe
     id={iframeId}
-    src={src}
+    src={iframeSrc}
     width="100%"
     frameborder="0"
     title={`${component} live demo`}
@@ -22,13 +69,39 @@ const iframeId = `iframe-${route.replace(/[^a-z0-9]/gi, '-')}`;
   ></iframe>
 </div>
 
-<script define:vars={{ iframeId, src }}>
+<script define:vars={{ iframeId, srcTemplate, initialSelectorValues }}>
+  const iframe = document.getElementById(iframeId);
+  const selectorElements = document.querySelectorAll(`select[data-iframe-id="${iframeId}"]`);
+
+  if (iframe && srcTemplate && selectorElements.length > 0) {
+    const values = { ...initialSelectorValues };
+
+    const buildSrc = () => {
+      let next = srcTemplate;
+      Object.entries(values).forEach(([key, value]) => {
+        next = next.replaceAll(`{${key}}`, encodeURIComponent(String(value)));
+      });
+      return next;
+    };
+
+    selectorElements.forEach((element) => {
+      element.addEventListener('change', (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLSelectElement)) return;
+        const key = target.dataset.selectorKey;
+        if (!key) return;
+        values[key] = target.value;
+        iframe.src = buildSrc();
+      });
+    });
+  }
+
   window.addEventListener('message', (event) => {
     if (event.data?.type !== 'iframe-resize') return;
-    const iframe = document.getElementById(iframeId);
-    if (!iframe) return;
-    if (iframe.contentWindow && event.source === iframe.contentWindow) {
-      iframe.style.height = event.data.height + 'px';
+    const resizedIframe = document.getElementById(iframeId);
+    if (!resizedIframe) return;
+    if (resizedIframe.contentWindow && event.source === resizedIframe.contentWindow) {
+      resizedIframe.style.height = event.data.height + 'px';
     }
   });
 </script>
@@ -67,6 +140,32 @@ const iframeId = `iframe-${route.replace(/[^a-z0-9]/gi, '-')}`;
     opacity: 0.8;
   }
   .open-link:hover { opacity: 1; text-decoration: underline; }
+
+  .iframe-controls {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 0.875rem;
+    border-bottom: 1px solid var(--sl-color-hairline);
+    background: var(--sl-color-bg);
+    flex-wrap: wrap;
+  }
+
+  .control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--sl-color-text);
+  }
+
+  .control-select {
+    border: 1px solid var(--sl-color-hairline);
+    background: var(--sl-color-bg-sidebar);
+    color: var(--sl-color-text);
+    border-radius: 6px;
+    padding: 0.3rem 0.5rem;
+    font-size: 0.75rem;
+  }
 
   iframe {
     display: block;
