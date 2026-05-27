@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build:ng": "npm run build --prefix angular-app",
-    "build": "npm run build:ng && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
