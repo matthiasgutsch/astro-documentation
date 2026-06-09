@@ -4,8 +4,9 @@ description: "What industry are you preparing colorants for?"
 ---
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
+import VersionSelect from '../../../components/VersionSelect.astro';
 
-<button onclick="history.back()" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:var(--sl-color-text-accent,#5872f5);background:var(--sl-color-bg,#fff);border:1px solid var(--sl-color-hairline,#e0dfe8);border-radius:6px;padding:5px 12px 5px 8px;cursor:pointer;margin-bottom:1.5rem;line-height:1">← Back</button>
+<VersionSelect componentSlug="button" componentName="Button" />
 
 <Tabs>
 <TabItem label="Overview">
