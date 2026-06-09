@@ -1,0 +1,69 @@
+---
+title: Button
+description: "Button component — v1.0.0. 2 variants (primary, secondary) × 3 sizes (small, medium, large)."
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+import VersionSelect from "../../../../components/VersionSelect.astro";
+
+<VersionSelect componentSlug="button" componentName="Button" />
+
+:::caution[Archived version]
+You are viewing **v1.0.0** — an archived release. [Switch to the current version](/components/button/).
+:::
+
+<Tabs>
+<TabItem label="Overview">
+
+### Description
+
+Button — 3 variants (primary, secondary) × 3 sizes (small, medium, large) × 2 states (idle, disabled).
+
+### What changed in v2.0.0
+
+| Change        | v1.0.0                 | v2.0.0                    |
+| ------------- | ---------------------- | ------------------------- |
+| Variants      | `primary`, `secondary` | + `accent`, `danger`      |
+| Sizes         | `S`, `M`, `L`          | same                      |
+| Icon slots    | none                   | `icon-left`, `icon-right` |
+| Design tokens | none bound             | full token set            |
+
+</TabItem>
+
+<TabItem label="Design">
+
+### Variants
+
+| Variant   | Description                      |
+| --------- | -------------------------------- |
+| Primary   | High-emphasis action.            |
+| Secondary | Medium-emphasis, outlined style. |
+
+### Sizes
+
+| Size | Height |
+| ---- | ------ |
+| S    | 36px   |
+| M    | 44px   |
+| L    | 52px   |
+
+</TabItem>
+
+<TabItem label="Develop">
+
+### Usage
+
+```html
+<!-- Primary button -->
+<button class="btn btn-primary btn-md">Label</button>
+
+<!-- Secondary button -->
+<button class="btn btn-secondary btn-sm">Label</button>
+```
+
+### Design Tokens
+
+_No bound design tokens in v1.0.0. Tokens were introduced in v2.0.0._
+
+</TabItem>
+</Tabs>

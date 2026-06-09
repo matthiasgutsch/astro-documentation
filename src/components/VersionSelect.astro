@@ -1,46 +1,68 @@
 ---
-// Versions defined here — add new entries as you release new versions
-const versions = [
-  { value: 'v21', label: 'v21 (current)' },
-  { value: 'v20', label: 'v20' },
-  // { value: 'v22', label: 'v22' },
-];
+import { DOC_VERSIONS, UNVERSIONED_VERSION, COMPONENT_VERSIONS } from '../config/versions';
+
+interface Props {
+  /** When set, shows per-component versions instead of global doc tracks. */
+  componentSlug?: string;
+  /** Component display name (e.g., "Button"). Used when componentSlug is set. */
+  componentName?: string;
+}
+
+const { componentSlug, componentName } = Astro.props;
+
+const componentVersions = componentSlug ? COMPONENT_VERSIONS[componentSlug] : undefined;
+
+// Use component-level versions when available, otherwise fall back to global tracks.
+const versions = componentVersions ?? DOC_VERSIONS;
+const unversionedVersion = UNVERSIONED_VERSION;
+
+// For component versions, pass the path map so the script can navigate directly.
+const componentPathMap = componentVersions
+  ? Object.fromEntries(componentVersions.map((v) => [v.value, v.path]))
+  : null;
+const currentComponentVersion = componentVersions?.find((v) => v.isCurrent)?.value ?? null;
+const currentVersionLabel = versions.find((v) => v.isCurrent)?.label ?? null;
 ---
 
 <div class="version-wrap">
-  <label class="version-label" for="version-select">Version</label>
   <select id="version-select" class="version-select">
     {versions.map((v) => <option value={v.value}>{v.label}</option>)}
   </select>
 </div>
 
-<script define:vars={{ versions }}>
+<script define:vars={{ versions, unversionedVersion, componentPathMap, currentComponentVersion }}>
   const sel = document.getElementById('version-select');
 
-  // Detect current version from URL.
-  // v21 (current) lives at /components/... (no version prefix).
-  // All others live at /vNN/components/...
-  const versionedMatch = window.location.pathname.match(/^\/(v\d+)\//);
-  const isUnversionedV21 = /^\/components\//.test(window.location.pathname);
+  if (componentPathMap) {
+    // ── Component-level version mode ──────────────────────────────────────
+    // Pre-select the option whose path matches the current URL.
+    const currentPath = window.location.pathname;
+    const active = versions.find((v) => currentPath === componentPathMap[v.value]);
+    if (active) sel.value = active.value;
+    else if (currentComponentVersion) sel.value = currentComponentVersion;
 
-  if (versionedMatch) sel.value = versionedMatch[1];
-  else if (isUnversionedV21) sel.value = 'v21';
+    sel.addEventListener('change', () => {
+      const newPath = componentPathMap[sel.value];
+      window.location.href = newPath;
+    });
+  } else {
+    // ── Global doc-track mode ──────────────────────────────────────────────
+    const versionedMatch = window.location.pathname.match(/^\/(v\d+)\//);
+    const isUnversionedPath = /^\/components\//.test(window.location.pathname);
 
-  sel.addEventListener('change', () => {
-    const chosen = sel.value;
-    const path = window.location.pathname;
+    if (versionedMatch) sel.value = versionedMatch[1];
+    else if (isUnversionedPath) sel.value = unversionedVersion;
 
-    // Strip any existing version prefix to get the bare component path
-    // e.g. "/v20/components/button/" → "components/button/"
-    //      "/components/button/"     → "components/button/"
-    const bare = path.replace(/^\/(v\d+\/)?/, '');
-
-    const newPath = chosen === 'v21'
-      ? `/${bare}`           // v21 has no prefix
-      : `/${chosen}/${bare}`; // all others get the version prefix
-
-    window.location.pathname = newPath;
-  });
+    sel.addEventListener('change', () => {
+      const chosen = sel.value;
+      const path = window.location.pathname;
+      const bare = path.replace(/^\/(v\d+\/)?/, '');
+      const newPath = chosen === unversionedVersion
+        ? `/${bare}`
+        : `/${chosen}/${bare}`;
+      window.location.pathname = newPath;
+    });
+  }
 </script>
 
 <style>

@@ -16,3 +16,33 @@
   font-size: 20px;
   color: #666;
 }
+
+.tablist-wrapper {
+  margin-bottom: 22px;
+}
+
+.sl-heading-wrapper h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--sl-color-text, #333);
+}
+
+.tablist-wrapper .tablist {
+}
+
+.tablist-wrapper li {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--sl-color-text-accent, #5872f5);
+  background: var(--sl-color-bg, #fff);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tablist-wrapper li a {
+  padding: 10px 20px;
+}
+
+.sl-anchor-link {
+  font-size: 17px;
+}
