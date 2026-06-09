@@ -27,6 +27,8 @@ export default defineConfig({
           items: [
             { label: "Button", slug: "components/button" },
             { label: "Tabs", slug: "components/tabs" },
+            { label: "Dropdown", slug: "components/dropdown" },
+            { label: "Accordion", slug: "components/accordion" },
           ],
         },
       ],
