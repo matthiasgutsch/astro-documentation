@@ -21,7 +21,7 @@ export const COMPONENT_VERSIONS: Record<string, ComponentVersion[]> = {
       isCurrent: true,
       path: "/components/button/",
     },
-    { value: "v1.0.0", label: "v1.0.0", path: "/components/button/v1.0.0/" },
+    { value: "v1.0.0", label: "v1.0.0", path: "/components/button/v1-0-0/" },
   ],
 };
 
